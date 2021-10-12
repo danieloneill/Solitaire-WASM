@@ -1,0 +1,8 @@
+Solitaire 1.0 Solitaire.qml
+Card 1.0 Card.qml
+FancyButton 1.0 FancyButton.qml
+FlatStack 1.0 FlatStack.qml
+MyRoundButton 1.0 MyRoundButton.qml
+SettingsLabel 1.0 SettingsLabel.qml
+Tableau 1.0 Tableau.qml
+logic 1.0 logic.js
