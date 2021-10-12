@@ -352,14 +352,14 @@ Rectangle {
         anchors.fill: parent
         radius: 5
         border {
-            width: selectCB.cbpath != 'Back.png' ? 1 : 0
+            width: 1
             color: 'black'
         }
         color: 'white'
 /*
         OpacityMask {
             anchors.fill: parent
-            anchors.margins: selectCB.cbpath == 'Back.png' ? 0 : 2
+            anchors.margins: 0
             source: backImage
             maskSource: backClipper
         }
@@ -368,10 +368,10 @@ Rectangle {
             id: backImage
 //            visible: false
             anchors.fill: parent
-            anchors.margins: selectCB.cbpath == 'Back.png' ? 0 : 2
-            source: selectCB.cbpath
+            anchors.margins: settings.cardback == 'Back.png' ? 0 : 2
+            source: settings.cardback
             //fillMode: Image.PreserveAspectCrop
-            fillMode: selectCB.cbpath == 'Back.png' ? Image.Stretch : Image.PreserveAspectCrop
+            fillMode: settings.cardback == 'Back.png' ? Image.Stretch : Image.PreserveAspectCrop
             sourceSize.width: width
             sourceSize.height: height
         }
@@ -380,7 +380,7 @@ Rectangle {
             id: backClipper
             visible: false
             anchors.fill: parent
-            anchors.margins: selectCB.cbpath == 'Back.png' ? 0 : 22
+            anchors.margins: settings.cardback == 'Back.png' ? 0 : 22
             radius: 5
             color: 'black'
         }

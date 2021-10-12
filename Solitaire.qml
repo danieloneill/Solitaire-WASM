@@ -1,13 +1,8 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Particles 2.0
-import QtQuick.Dialogs
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.2
-
-import QtMultimedia
-
-import Qt.labs.settings 1.0
 
 import "logic.js" as Logic
 
@@ -18,7 +13,7 @@ Item {
     visible: true
     //title: qsTr("Solitaire")
 
-    Settings {
+    Item {
         id: settings
         property string background: 'background.jpg'
         property string cardback: 'Back.png'
@@ -49,6 +44,7 @@ Item {
         }
     }
 
+/** Requires QtMultimedia, which (apparently) isn't supported on Qt 6.3 in WebAssembly: **
     SoundEffect {
         id: shuffle1
         source: "PlayingCards_Shuffle_01.wav"
@@ -122,6 +118,7 @@ Item {
         source: "Victory Bells.wav"
         volume: topContainer.volume
     }
+*/
 
     FontLoader {
         id: ostrichSans
@@ -156,6 +153,8 @@ Item {
 
         function playClip(name)
         {
+            return; // Not supported in Qt 6.4 WebAssembly
+/*
             if( ""+settings.value('muted', 'false') == "true" )
             {
                 //console.log('I am muted!');
@@ -211,6 +210,7 @@ Item {
                 else
                     console.log("Got shuffle slot 4");
             }
+*/
         }
 
         FlatStack {
@@ -655,47 +655,6 @@ Item {
             redealText.visible = !cbUnlimited.checked;
 
             configMenu.opacity = 0;
-        }
-    }
-
-    FileDialog {
-        id: selectBG
-        property string bgpath: settings.value('background', 'background.jpg')
-        title: 'Background Image...'
-        //selectExisting: true
-        //selectFolder: false
-        //selectMultiple: false
-        fileMode: FileDialog.OpenFile
-        nameFilters: [ "Image files (*.jpg *.bmp *.png *.gif *.jpeg)" ]
-        onAccepted: {
-            console.log("You chose: " + JSON.stringify(selectBG.fileUrls, null, 2));
-            bgpath = selectBG.fileUrls[ selectBG.fileUrls.length - 1];
-            bgImage.source = bgpath;
-            selectBG.close();
-        }
-        onRejected: {
-            console.log("Canceled");
-            selectBG.close();
-        }
-    }
-
-    FileDialog {
-        id: selectCB
-        property string cbpath: settings.value('cardback', 'Back.png')
-        title: 'Card Image...'
-        //selectExisting: true
-        //selectFolder: false
-        //selectMultiple: false
-        fileMode: FileDialog.OpenFile
-        nameFilters: [ "Image files (*.jpg *.bmp *.png *.gif *.jpeg)" ]
-        onAccepted: {
-            console.log("You chose: " + JSON.stringify(selectCB.fileUrls, null, 2));
-            cbpath = selectCB.fileUrls[ selectCB.fileUrls.length - 1];
-            selectCB.close();
-        }
-        onRejected: {
-            console.log("Canceled");
-            selectCB.close();
         }
     }
 
